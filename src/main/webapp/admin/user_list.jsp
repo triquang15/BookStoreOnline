@@ -6,13 +6,14 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Manage Users - Evergreen BookStore Administration</title>
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
 	<jsp:directive.include file="header.jsp" />
 
 	<div align="center">
-		<h2>Users Management</h2>
+		<h2 class="page_heading">Users Management</h2>
 		<h3>
 			<a href="user_form.jsp">Create New User</a>
 		</h3>
@@ -20,7 +21,7 @@
 
 	<c:if test="${message != null}">
 		<div align="center">
-			<h4>${message}</h4>
+			<h4 class="message">${message}</h4>
 		</div>
 	</c:if>
 
