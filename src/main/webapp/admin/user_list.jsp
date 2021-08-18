@@ -7,6 +7,8 @@
 <meta charset="ISO-8859-1">
 <title>Manage Users - Evergreen BookStore Administration</title>
 <link rel="stylesheet" href="../css/style.css">
+<script type="text/javascript" src="../js/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="../js/jquery.validate.min.js"></script>
 </head>
 <body>
 
@@ -42,7 +44,7 @@
 					<td>${user.email}</td>
 					<td>${user.fullName}</td>
 					<td><a href="edit_user?id=${user.userId}">Edit</a> &nbsp; <a
-						href="delete_user?id=${user.userId}" onclick="return confirmDelete()">Delete</a></td>
+						href="javascript:void(0);" class="deleteLink" id="${user.userId}">Delete</a></td>
 				</tr>
 			</c:forEach>
 
@@ -53,20 +55,17 @@
 </body>
 
 <script type="text/javascript">
-	function confirmDelete(userId) {
 
-		if (userId == 40) {
-
-			alert('The default admin user account cannot be deleted')
-
-		} else {
-
-			confirm('Are you Sure to delete the user with ID ' + userId + ' ?')
-
-			window.location = 'delete_user?id=' + userId;
-
-		}
-
-	}
+	$(document).ready(function () {
+		$(".deleteLink").each(function() {
+			$(this).on("click", function() {
+				userId = $(this).attr("id");
+				if(confirm('Are you sure to delete the user with Id ' + userId + '?')) {
+					window.location = 'delete_user?id=' + userId;
+					}
+				});
+			});
+	});
+	
 </script>
 </html>
