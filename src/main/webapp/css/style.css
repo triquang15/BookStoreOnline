@@ -1,11 +1,11 @@
 @charset "UTF-8";
 
-#header_menu{
+#header_menu {
 	display: table;
 }
 
 #header_menu div {
-	display: table-cell; 
+	display: table-cell;
 	padding-right: 20px;
 }
 
@@ -42,7 +42,6 @@ table {
 
 th, td {
 	padding: 8px;
-	
 }
 
 th {
@@ -59,7 +58,6 @@ table.form {
 button {
 	color: blue;
 	border-radius: 5px;
-	
 }
 
 button[type=submit] {
@@ -70,6 +68,7 @@ button:hover {
 	background-color: white;
 	color: red;
 }
+
 input {
 	border: 1px solid;
 	border-radius: 4px;

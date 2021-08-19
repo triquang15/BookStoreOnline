@@ -1,6 +1,8 @@
 package com.triquang.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 
@@ -14,6 +16,8 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 	}
 
 	public Users create(Users users) {
+		String encryptedPassword = HashGenerator.generateMD5(users.getPassword());
+		users.setPassword(encryptedPassword);
 		return super.create(users);
 	}
 
@@ -58,4 +62,18 @@ public class UserDAO extends JpaDAO<Users> implements GenericDAO<Users> {
 		return super.countWithNamedQuery("Users.countAll");
 	}
 
+	public boolean checkLogin(String email, String password) {
+		Map<String, Object> parameters = new HashMap<>();
+		String encryptedPassword = HashGenerator.generateMD5(password);
+		parameters.put("email", email);
+		parameters.put("password", encryptedPassword);
+		
+		List<Users> listUsers = super.findWithNamedQuery("Users.checkLogin", parameters);
+		
+		if (listUsers.size() == 1) {
+			return true;
+		}
+		
+		return false;
+	}
 }

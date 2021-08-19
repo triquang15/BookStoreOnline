@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.triquang.dao.HashGenerator;
 import com.triquang.dao.UserDAO;
 import com.triquang.entity.Users;
 
@@ -22,7 +23,7 @@ public class UserServices {
 	private HttpServletRequest request;
 	private HttpServletResponse response;
 
-	public UserServices(EntityManager entityManager,HttpServletRequest request, HttpServletResponse response) {
+	public UserServices(EntityManager entityManager, HttpServletRequest request, HttpServletResponse response) {
 		this.request = request;
 		this.response = response;
 		this.entityManager = entityManager;
@@ -122,6 +123,28 @@ public class UserServices {
 		listUser(message);
 	}
 
+	public void login() throws ServletException, IOException {
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+
+		boolean loginResult = userDAO.checkLogin(email, password);
+
+		if (loginResult) {
+
+			request.getSession().setAttribute("useremail", email);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/");
+			dispatcher.forward(request, response);
+		} else {
+
+			String message = "Login failed";
+			request.setAttribute("message", message);
+
+			RequestDispatcher dispatcher = request.getRequestDispatcher("login.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
+
 	public void updateUser() throws ServletException, IOException {
 
 		int userId = Integer.parseInt(request.getParameter("userId"));
@@ -133,21 +156,27 @@ public class UserServices {
 		Users userByEmail = userDAO.findByEmail(email);
 
 		if (userByEmail != null && userByEmail.getUserId() != userById.getUserId()) {
-			
+
 			String message = "Could not update user";
 			request.setAttribute("message", message);
-			
+
 			RequestDispatcher dispatcher = request.getRequestDispatcher("message.jsp");
 			dispatcher.forward(request, response);
 
 		} else {
 
-			Users users = new Users(userId, email, fullName, password);
-			userDAO.update(users);
+			userById.setEmail(email);
+			userById.setFullName(fullName);
+
+			if (password != null & !password.isEmpty()) {
+				String encryptedPassword = HashGenerator.generateMD5(password);
+				userById.setPassword(encryptedPassword);
+			}
+
+			userDAO.update(userById);
 
 			String message = "User has been updated successfully";
 			listUser(message);
-
 		}
 
 	}
