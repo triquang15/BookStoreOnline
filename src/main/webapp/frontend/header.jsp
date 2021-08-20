@@ -10,11 +10,12 @@
 		<input type="text" name="keyword" size="50" />
 		<input type="button" value="Search" />
 		
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		<a href="login">Sign In</a> |
 		<a href="register">Register</a> |
-		<a href="view_card">Cart</a>
+		<a href="view_card">Cart</a> 
 	</div>
+	<br>
 <div>
 	<c:forEach var= "category" items="${listCategories}" varStatus="status">
 	<a href="view_category?id${category.categoryId}">

@@ -9,4 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error/404.jsp</location>
+	</error-page>
+	
+	<error-page>
+		<error-code>505</error-code>
+		<location>/error/505.jsp</location>
+	</error-page>
 </web-app>
