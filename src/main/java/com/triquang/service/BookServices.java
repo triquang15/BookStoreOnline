@@ -184,4 +184,49 @@ public class BookServices {
 
 	}
 
+	public void listBookByCategory() throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		int categoryId = Integer.parseInt(request.getParameter("id"));
+		Category category = categoryDAO.get(categoryId);
+
+		if (category == null) {
+			String message = "Sorry, the category ID " + categoryId + " is not available.";
+			request.setAttribute("message", message);
+			request.getRequestDispatcher("frontend/message.jsp").forward(request, response);
+
+			return;
+		}
+
+		List<Book> listBooks = bookDAO.listByCategory(categoryId);
+
+		request.setAttribute("listBooks", listBooks);
+		request.setAttribute("category", category);
+
+		String listPage = "frontend/books_list_by_category.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(listPage);
+		requestDispatcher.forward(request, response);
+
+	}
+
+	public void viewBookDetail() throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		Integer bookId = Integer.parseInt(request.getParameter("id"));
+		Book book = bookDAO.get(bookId);
+
+		String destPage = "frontend/book_detail.jsp";
+
+		if (book != null) {
+			request.setAttribute("book", book);
+
+		} else {
+			destPage = "frontend/message.jsp";
+			String message = "Sorry, the book with ID " + bookId + " is not available.";
+			request.setAttribute("message", message);
+		}
+
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destPage);
+		requestDispatcher.forward(request, response);
+
+	}
+
 }

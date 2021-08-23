@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.triquang.controller.BaseServlet;
+import com.triquang.dao.BookDAO;
 import com.triquang.dao.CategoryDAO;
+import com.triquang.entity.Book;
 import com.triquang.entity.Category;
 
 /**
@@ -35,7 +37,12 @@ public class HomeServlet extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		CategoryDAO categoryDAO = new CategoryDAO(entityManager);
+		BookDAO bookDAO = new BookDAO(entityManager);
+		
 		List<Category> listCategories = categoryDAO.listAll();
+		List<Book> listNewBooks = bookDAO.listNewBook();
+		
+		request.setAttribute("listNewBooks", listNewBooks);
 		request.setAttribute("listCategories", listCategories);
 		
 		String homepage = "frontend/index.jsp";
