@@ -179,4 +179,15 @@ public class BookDAOTest extends BaseDAOTest {
 		
 		assertEquals(listBooks.size(), 4);
 	}
+	
+	@Test
+	public void searchBook() {
+		String keyword = "Java";
+		List<Book> result = bookDAO.search(keyword);
+		
+		for (Book book : result) {
+			System.out.println(book.getTitle());
+		}
+		 assertEquals(3, result.size());
+	}
 }
