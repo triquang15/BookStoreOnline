@@ -1,47 +1,43 @@
- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
- <div align="center">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<div align="center">
 	<div>
-		<img alt="logo" src="../images/BookstoreAdminLogo.png" />
+		<a href="${pageContext.request.contextPath}/admin/">
+			<img src="../images/BookstoreAdminLogo.png" />
+		</a>
 	</div>
-
 	<div>
-		Welcome, <c:out value="${sessionScope.useremail}"></c:out> | <a href="logout">Logout</a> <br> <br>
+		Welcome, <c:out value="${sessionScope.useremail}" /> | <a href="logout">Logout</a>
+		<br/><br/>
 	</div>
-	<div id="header_menu" >
+	<div id="headermenu">
 		<div>
-			<a href="list_users"> <img alt="user" src="../images/users.png">
-				<br> Users
+			<a href="list_users">
+				<img src="../images/users.png" /><br/>Users
 			</a>
 		</div>
-
 		<div>
-			<a href="list_category"> <img alt="Categories"
-				src="../images/category.png"> <br> Categories
+			<a href="list_category">
+				<img src="../images/category.png" /><br/>Categories
 			</a>
 		</div>
-
 		<div>
-			<a href="list_books"> <img alt="Books" src="../images/bookstack.png">
-				<br> Books
+			<a href="list_books">
+				<img src="../images/bookstack.png" /><br/>Books
 			</a>
 		</div>
-
 		<div>
-			<a href="customers"> <img alt="Customers"
-				src="../images/customer.png"> <br> Customers
+			<a href="list_customer">
+				<img src="../images/customer.png" /><br/>Customers
 			</a>
 		</div>
-
-
 		<div>
-			<a href="reviews"> <img alt="reviews" src="../images/review.png">
-				<br> Reviews
+			<a href="list_review">
+				<img src="../images/review.png" /><br/>Reviews
 			</a>
-		</div >
+		</div>
 		<div>
-			<a href="orders"> <img alt="orders" src="../images/order.png">
-				<br> Orders
+			<a href="list_order"><img src="../images/order.png" /><br/>
+				Orders
 			</a>
 		</div>
 	</div>

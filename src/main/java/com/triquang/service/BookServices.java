@@ -160,7 +160,7 @@ public class BookServices {
 		Book bookTitle = bookDAO.findByTitle(title);
 		Book existBook = bookDAO.get(bookId);
 
-		if (!existBook.equals(bookTitle)) {
+		if (bookTitle != null && !existBook.equals(bookTitle)) {
 			String message = "Could not update book because there's another book heaving same title";
 
 			listBooks(message);

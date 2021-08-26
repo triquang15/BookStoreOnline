@@ -190,4 +190,12 @@ public class BookDAOTest extends BaseDAOTest {
 		}
 		 assertEquals(3, result.size());
 	}
+	
+	@Test
+	public void testCountByCategory() {
+		int categoryId = 2;
+		long countByCategory = bookDAO.countByCategory(categoryId);
+		
+		assertTrue(countByCategory == 8);
+	}
 }

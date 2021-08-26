@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.triquang.dao.BookDAO;
 import com.triquang.dao.CategoryDAO;
 import com.triquang.entity.Category;
 
@@ -116,11 +117,21 @@ public class CategoryServices {
 	public void deleteCategory() throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		int categoryId = Integer.parseInt(request.getParameter("id"));
-		categoryDAO.delete(categoryId);
-		
-		String massage = "The category with Id " + categoryId + "has been remove successfully.";
-		listCategory(massage);
-		
+		BookDAO bookDAO = new BookDAO(entityManager);
+		long numberOfBooks = bookDAO.countByCategory(categoryId);
+		String message;
+
+		if (numberOfBooks > 0) {
+			message = "Could not detete the category (ID: %d) because it currently contains some book";
+			message = String.format(message, numberOfBooks);
+		} else {
+			categoryDAO.delete(categoryId);
+
+			message = "The category with Id " + categoryId + "has been remove successfully.";
+		}
+
+		listCategory(message);
+
 	}
 
 }

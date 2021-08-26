@@ -1,10 +1,11 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<div align="center">
+<div class="center">
 
 	<div>
+	<a href="${pageContext.request.contextPath}/">
 		<img alt="logo" src="images/BookstoreLogo.png">
-
+	</a>
 	</div>
 
 	<div>
