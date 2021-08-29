@@ -27,7 +27,7 @@
 		 <a href="logout">Logout</a> | 
 			
 			</c:if>
-		<a href="view_card">Cart</a>	
+		<a href=view_cart>Cart</a>	
 		</form>
 	</div>
 	<br>
