@@ -1,5 +1,5 @@
 package com.triquang.entity;
-// Generated May 22, 2018 5:46:15 AM by Hibernate Tools 5.2.10.Final
+
 
 import java.util.Date;
 import java.util.HashSet;
