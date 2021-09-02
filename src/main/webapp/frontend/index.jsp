@@ -19,13 +19,13 @@
 		</div>
 		<div class="next-row">
 			<h2>Best-Selling Books:</h2>
-			<c:forEach items="${listBestSellingBooks}" var="book">
+			<c:forEach items="${listBestSellingBook}" var="book">
 				<jsp:directive.include file="book_group.jsp" />
 			</c:forEach>			
 		</div>
 		<div class="next-row">
 			<h2>Most-favored Books:</h2>
-			<c:forEach items="${listFavoredBooks}" var="book">
+			<c:forEach items="${listMostFavoredBooks}" var="book">
 				<jsp:directive.include file="book_group.jsp" />
 			</c:forEach>			
 		</div>

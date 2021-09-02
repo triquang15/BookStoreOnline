@@ -75,7 +75,7 @@ public class BookDAOTest extends BaseDAOTest {
 		existBook.setTitle("Python for Data Analysis");
 		existBook.setAuthor("Wes McKinney");
 		existBook.setDescription(
-				"Get complete instructions for manipulating, processing, cleaning, and crunching datasets in Python. Updated for Python 3.6, the second edition of this hands-on guide is packed with practical case studies that show you how to solve a broad set of data analysis problems effectively. You’ll learn the latest versions of pandas, NumPy, IPython, and Jupiter in the process.");
+				"Get complete instructions for manipulating, processing, cleaning, and crunching datasets in Python. Updated for Python 3.6, the second edition of this hands-on guide is packed with practical case studies that show you how to solve a broad set of data analysis problems effectively. Youï¿½ll learn the latest versions of pandas, NumPy, IPython, and Jupiter in the process.");
 		existBook.setPrice(41.02f);
 		existBook.setIsbn("978-1491957665");
 
@@ -169,33 +169,54 @@ public class BookDAOTest extends BaseDAOTest {
 		assertTrue(listBooks.size() > 0);
 
 	}
-	
+
 	@Test
 	public void testNewBook() {
 		List<Book> listBooks = bookDAO.listNewBook();
 		for (Book book : listBooks) {
 			System.out.println(book.getTitle() + " - " + book.getPublishDate());
 		}
-		
+
 		assertEquals(listBooks.size(), 4);
 	}
-	
+
 	@Test
 	public void searchBook() {
 		String keyword = "Java";
 		List<Book> result = bookDAO.search(keyword);
-		
+
 		for (Book book : result) {
 			System.out.println(book.getTitle());
 		}
-		 assertEquals(3, result.size());
+		assertEquals(3, result.size());
 	}
-	
+
 	@Test
 	public void testCountByCategory() {
 		int categoryId = 2;
 		long countByCategory = bookDAO.countByCategory(categoryId);
-		
+
 		assertTrue(countByCategory == 8);
+	}
+
+	@Test
+	public void testBestSellingBook() {
+		List<Book> testBestSellingBook = bookDAO.listBestSellingBook();
+
+		for (Book book : testBestSellingBook) {
+			System.out.println(book.getTitle());
+		}
+
+		assertEquals(5, testBestSellingBook.size());
+	}
+
+	@Test
+	public void testMostFavoredBook() {
+		List<Book> topMostFavoredBook = bookDAO.listMostFavoredBooks();
+
+		for (Book book : topMostFavoredBook) {
+			System.out.println(book.getTitle());
+		}
+		assertEquals(5, topMostFavoredBook.size());
 	}
 }

@@ -1,11 +1,11 @@
 package com.triquang.dao;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import com.triquang.entity.Book;
 
 public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
@@ -79,8 +79,29 @@ public class BookDAO extends JpaDAO<Book> implements GenericDAO<Book> {
 	public List<Book> search(String keyword) {
 		return super.findWithNamedQuery("Book.search", "keyword", keyword);
 	}
-	
+
 	public long countByCategory(int categoryId) {
 		return super.countWithNamedQuery("Book.countByCategory", "catId", categoryId);
+	}
+
+	public List<Book> listBestSellingBook() {
+
+		return super.findWithNamedQuery("OrderDetail.bestSelling", 0, 5);
+
+	}
+
+	public List<Book> listMostFavoredBooks() {
+
+		List<Book> mostFavoredBook = new ArrayList<>();
+
+		List<Object[]> result = super.findWithNamedQueryObject("Review.mostFavoredBooks", 0, 5);
+
+		if (!result.isEmpty()) {
+			for (Object[] objects : result) {
+				Book book = (Book) objects[0];
+				mostFavoredBook.add(book);
+			}
+		}
+		return mostFavoredBook;
 	}
 }
